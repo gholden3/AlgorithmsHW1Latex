@@ -190,7 +190,7 @@ Pay special attention to
 
 \begin{code}
 
-binary-search-2(array, value, min-idx, max-idx):\\
+{\sc binary-search-2}(array, value, min-idx, max-idx):\\
 1\> $\backslash$$\backslash$ stop condition\\
 2\> \If max-idx $\leq$ min-idx:  \\
 3\>\>    \If value $>$ array[min-idx]:\\
@@ -205,7 +205,7 @@ binary-search-2(array, value, min-idx, max-idx):\\
 12\> $\backslash$$\backslash$ search left\\
 13\>    $\Return$ binary-search(array, value, min-idx, max-idx -1);\\ \\ \\ \\ \\ \\ \\
 
-binary-search(array, min-idx, max-idx, value):\\
+{\sc binary-search}(array, min-idx, max-idx, value):\\
 1\> \While (min-idx $\leq$ max-idx):\\
 2\> \>  mid-idx = min-idx + floor((max-idx - min-idx) / 2)\\
 3\> \>       // Check if the middle is value\\
@@ -224,7 +224,7 @@ binary-search(array, min-idx, max-idx, value):\\
 
 
 
-insertion-sort(array): \\
+{\sc insertion-sort}(array): \\
 \> \For j = 2 $\to$ array.length\\
 \> \>key = array[j]\\
 \> \> i = j - 1\\
@@ -319,7 +319,7 @@ algorithms through inversions.
   \ifnum\me<2
 \begin{solution}  
 
-The largest number of inversions is when the array is sorted in decreasing order (descending). In this case, the number of inversions is (n-1) + (n-2) + ... + 1 which sums to: 1/2(n)(n+1) - n 
+The largest number of inversions is when the array is sorted in decreasing order (descending). In this case, the number of inversions is (n-1) + (n-2) + ... + 1 which sums to: 1/2(n)(n-1).\\
 
 The smallest number of inversions is when the array is sorted in increasing order. The number of inversions is 0. 
 
@@ -356,18 +356,38 @@ Now when we insert the first element into the left array, since the array was or
 	\item[(e)] (3 points) Describe an algorithm {\sc Find-Inversion}$(A)$
 	that takes as input an array $A$ and finds an inversion in $O(n)$ time. 
 	\ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution} 
+
+\begin{code}
+{\sc Find-Inversion}(A):\\
+1\> \For i = 0 $\to$ A.length -2 \\
+2\>\>    \If A[i+1] $<$ A[i]:\\
+3\>\>\>$\backslash$$\backslash$ inversion found. return a tuple with the indeces.\\
+4\>\>\>\Return (i,i+1)\\
+5\>\Return -1\\
+\end{code}
+\end{solution}
 	\fi 
 	\item[(f)] (4 points) Write the loop invariant for the main iteration in your algorithm {\sc Find-Inversion}.  Provide brief arguments about the Initialization, Maintenance, and Usefulness of your loop invariant.
 	\ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution} \\\\  
+\textbf{Loop invariant}: At the beginning of every iteration, none of the values in A have been modified or moved, and the values in A[0-i] are in non decreasing order. \\
+\textbf{Initialization}: Just before the first loop iteration, i=0. For the single element array, just considering the value at index zero it is true that sub-array are in non decreasing order. \\
+\textbf{Maintenance}: The loop works by comparing A[i] to A[i+1]. If the element A[i+1] is less than the "current" element A[i], the function returns. Thus if we are still executing the loop we can assume the next element is greater than or equal to the "current" element. We then increase the index to point to the A[i+1], "next" element. \\
+\textbf{Termination}:The loop terminates under two conditions. The first is when the next element is less than the current one. In this case, an inversion is found. We return a tuple containing the two indeces that represent an inversion, i and i+1. The other way the loop terminates is if it finishes all of its iterations and has not returned any inversions. In this case there are no inversions in the array, implying it is sorted in non decreasing order, so we return -1. 
+
+\end{solution}
 	\fi 
 	\item[(g)] (4 points) Use parts (d) and (e) to design an algorithm
 	that sorts an array in time $O(mn)$ where $m$ is the number
 	of inversions in the original array. What is the worst-case running time
 	of this algorithm?
 	\ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution}   
+Insertion sort actually has this property! If you think about it, for every n element in the array, when you "insert" it into the sorted array in the correct position, every "shuffle" you make to move the higher values over to the right to make room for the new element is analogous to "swapping" an inversion. For brevity, I will not include the code for insertion sort here but it can be seen on pg 18 of CLRS. \\
+The worst case running time is when m (number of inversion) is very high. In the worst case, the array is originally in non-ascending order which is "reverse sorted". In this case, we know from part (b) that in the worst case, if all elements are distinct non negative integers, the number of inversions is 1/2(n)(n-1). Then it makes sense that the worst case running time is \Theta(n^2).
+
+\end{solution}
 	\fi
 	
 \end{enumerate}
@@ -396,7 +416,7 @@ of inversions is $m$?
 \fi
 \item[(h)] (4 points) Now replace the algorithm to find inversion
 in part (f) with {\sc Find-Inversion-Randomized}. What
-is the worst case, expected runtime of this algorithm?
+is the worst case, expected run time of this algorithm?
 \hint{Recall that $\sum_{i=1}^{m} 1/i=\log m$.}
 \ifnum\me<2
 \begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
@@ -423,7 +443,12 @@ $\omega(g)$.  (More than one of these can be true for a single pair!)
    \item[(a)] $f(n) = (n^{n})^{5}$; \quad $g(n)=n^{(n^{5})}$.
 
   \ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution}  
+
+f(n) = (n^n)^5\> \> ? \> \>  g(n)=n^(n^5) \\
+% $f(n) = (n^{n})^{5}$;  $g(n)=n^{(n^{5})}$.
+
+\end{solution}
   \fi
 
   \item[(b)] $f(n) =\left(\frac{1}{4}\right)^n + 3 n^{17}$; \quad $g(n) = 16^{\log_2 n}$.
