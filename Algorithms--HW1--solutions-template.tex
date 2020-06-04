@@ -41,6 +41,7 @@ It is not recommended to change any other parts of the code.
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{amssymb}
 
 % \setlength{\oddsidemargin}{.0in} \setlength{\evensidemargin}{.0in}
 % \setlength{\textwidth}{6.5in} \setlength{\topmargin}{-0.4in}
@@ -385,7 +386,7 @@ Now when we insert the first element into the left array, since the array was or
 	\ifnum\me<2
 \begin{solution}   
 Insertion sort actually has this property! If you think about it, for every n element in the array, when you "insert" it into the sorted array in the correct position, every "shuffle" you make to move the higher values over to the right to make room for the new element is analogous to "swapping" an inversion. For brevity, I will not include the code for insertion sort here but it can be seen on pg 18 of CLRS. \\
-The worst case running time is when m (number of inversion) is very high. In the worst case, the array is originally in non-ascending order which is "reverse sorted". In this case, we know from part (b) that in the worst case, if all elements are distinct non negative integers, the number of inversions is 1/2(n)(n-1). Then it makes sense that the worst case running time is \Theta(n^2).
+The worst case running time is when m (number of inversion) is very high. In the worst case, the array is originally in non-ascending order which is "reverse sorted". In this case, we know from part (b) that in the worst case, if all elements are distinct non negative integers, the number of inversions is $1/2(n)(n-1)$. Then it makes sense that the worst case running time is $\Theta(n^2)$.
 
 \end{solution}
 	\fi
@@ -445,8 +446,11 @@ $\omega(g)$.  (More than one of these can be true for a single pair!)
   \ifnum\me<2
 \begin{solution}  
 
-f(n) = (n^n)^5\> \> ? \> \>  g(n)=n^(n^5) \\
-% $f(n) = (n^{n})^{5}$;  $g(n)=n^{(n^{5})}$.
+$(n^{n})^{5}$ \quad \quad ? \quad  $n^{(n^{5})}$ \\ 
+${5n}\log(n)$ \quad ? \quad  $n^5log(n)$\\
+${5n}$ \quad \quad \quad ? \quad  $n^5$
+
+$\therefore$ f(n) belongs to $O(g)$ and $o(g)$ because $g(n)$ is not a tight upper bound.
 
 \end{solution}
   \fi
@@ -454,14 +458,24 @@ f(n) = (n^n)^5\> \> ? \> \>  g(n)=n^(n^5) \\
   \item[(b)] $f(n) =\left(\frac{1}{4}\right)^n + 3 n^{17}$; \quad $g(n) = 16^{\log_2 n}$.
 
   \ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution} \\  
+$\left(\frac{1}{4}\right)^n + 3 n^{17}$ \quad ? \quad  $16^{\log_2 n}$ \\ 
+... \quad \quad \quad \quad \quad? \quad  $2^{4 \log_2 n}$\\
+... \quad \quad \quad \quad \quad ? \quad  $(2^{ \log_2 n})^4$\\
+$\left(\frac{1}{4}\right)^n + 3 n^{17}$ \quad  ? \quad  $n^4$\\
+$ 3 n^{17}$ \quad \quad \quad \quad ? \quad  $n^4$ \quad \quad since $\left(\frac{1}{4}\right)^n$ approaches 0 as n $\to$ $\infty$\\
+$\therefore$ f(n) belongs to $\Omega(g)$ and $\omega(g)$ because $g(n)$ is not a tight lower bound.
+
+\end{solution}
   \fi
 
   \item[(c)]  $f(n) = \log(n^{256}+45)$; \quad
   $g(n) = \log(4^{n^2}+5n)$.
   
   \ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution}   
+
+\end{solution}
   \fi
 
  \item[(d)] $f(n) = \frac{5^n}{n+n\log n}$; \quad
