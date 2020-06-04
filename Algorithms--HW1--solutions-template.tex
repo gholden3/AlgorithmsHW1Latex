@@ -475,6 +475,12 @@ $\therefore$ f(n) belongs to $\Omega(g)$ and $\omega(g)$ because $g(n)$ is not a
   \ifnum\me<2
 \begin{solution}   
 
+$ \log(n^{256}+45)$ \quad ? \quad $ \log(4^{n^2}+5n)$\\
+$ \log(n^{256})$ \quad \quad \quad  ? \quad $ \log(4^{n^2})$ \quad constant removal\\
+$ 256 \log(n)$ \quad  \quad \quad  ? \quad ${n^2} \log(4)$\\
+$ \log(n)$ \quad  \quad \quad  \quad ? \quad ${n^2}$ \quad constant removal \\
+$\therefore$ f(n) belongs to $O(g)$ and $o(g)$ because $g(n)$ is not a tight upper bound.
+
 \end{solution}
   \fi
 
@@ -482,13 +488,26 @@ $\therefore$ f(n) belongs to $\Omega(g)$ and $\omega(g)$ because $g(n)$ is not a
   $g(n) =125^{\sqrt{n}}$.
 
   \ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution} \\  
+$ \frac{5^n}{n+n\log n}$ ? $125^{\sqrt{n}}$ \\
+$ \frac{5^n}{125^{\sqrt{n}}}$ \quad ? $n+n\log n$ \\
+$ \frac{5^n}{125^{\sqrt{n}}}$\quad ? $n\log n$ \quad removing lower order terms \\
+$ \frac{5^n}{5^{3  \sqrt{n}}}$\quad ? $n\log n$\\
+$ 5^{n-{3  \sqrt{n}}} $\quad ? $n\log n$ \\
+$ 5^{n} $\quad ? $n\log n$ \quad removing lower order terms\\
+$\therefore$ f(n) belongs to $\Omega(g)$ and $\omega(g)$ because $g(n)$ is not a tight lower bound.
+
+\end{solution}
   \fi
 
   \item[(e)] $f(n) = n^{\log n}$; \quad $g(n)=(\log n)^n$.
 
   \ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution} \\  
+
+ f(n) belongs to $O(g)$ and $o(g)$ because $g(n)$ is not a tight upper bound.
+
+\end{solution}
   \fi
 \end{itemize}
 
@@ -514,28 +533,60 @@ For parts (a) through (d), let $f(n) = n$, $g(n) = 100n$ and $h(n) = \frac{n}{10
     Prove or disprove: $2^{f(n)} = O(2^{g(n)})$ 
     
   \ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution}  \\
+$2^{f(n)} = O(2^{g(n)})$ ? \\
+$2^{n} = O(2^{100n})$ \\ 
+we can see this is TRUE because:
+
+0 $\leq$  $2^{n}$ $\leq$  $2^{100n}$ for all n $\geq$ 0
+\end{solution}
   \fi
     
     \item[(b)] (2 points)
     Prove or disprove: $2^{f(n)} = O(2^{h(n)})$
 
   \ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution}   \\
+$2^{f(n)} = O(2^{h(n)})$ ? \\
+$2^{n} = O(2^{n/100})$ ? \\ 
+Let's take the limit as n $\to$ $\infty$ of $\frac{2^{n}}{2^{n/100}}$
+Since the denominator is much smaller as n grows, we can see this approaches $\infty$\\
+Therefore f(n) belongs to $\omega(g(n))$ so it cannot belong to $O(g(n))$
+
+\end{solution}
   \fi
 
     \item[(c)] (1 point) 
     Prove or disprove: $f(n)! = O(g(n)!)$ 
     
   \ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution}   \\
+$f(n)! = O(g(n)!)$ ?\\
+$n! = O(100n!)$   ? \\ 
+We can see intuitively that this is TRUE:\\
+0 $\leq$  $n!$ $\leq$  $100n!$ for all n $\geq$ 0
+
+
+\end{solution}
   \fi
 
     \item[(d)] (2 points) 
     Prove or disprove: $f(n)! = O(h(n)!)$ 
     
   \ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution}   \\
+$f(n)! = O(h(n)!)$ ?\\ 
+$n! = O(\frac{n}{100}!)$\\
+in order for this to be true, we must have: \\
+0 $\leq$  $n!$ $\leq$ c $\frac{n}{100}!$ for $n > n_0$ and a positive constant c\\
+There is no c and $n_0$ combination that will make this equation true. $n!$ will always eventually exceed c $\frac{n}{100}!$\\
+This makes sense intuitively. Think about the expansion of $n!$:\\
+(n)+(n-1)+(n-2)+(n-3)...\\ 
+and the expansion of $\frac{n}{100}!$:\\
+$\frac{n}{100} + (\frac{n}{100} - 1) + ... $\\ 
+even with a very large c, the $\frac{n}{100}!$ is never able to catch up. The limit of f(n)/g(n) as n $\to$ $\infty$ actually approaces $\infty$ which means the right side of the equation is actually  a lower bound ($\Omega$), NOT an ubber bound (O). 
+
+\end{solution}
   \fi
 
     \item[(e)] (2 points) 
@@ -545,9 +596,17 @@ For parts (a) through (d), let $f(n) = n$, $g(n) = 100n$ and $h(n) = \frac{n}{10
         \item[(ii)] $p(n) = O(q(n))$
     \end{enumerate}
     Prove that $\lg (p(n)) = O(\lg (q(n))$
+    
+    
 
   \ifnum\me<2
-\begin{solution}   INSERT YOUR SOLUTION HERE   \end{solution}
+\begin{solution}   \\
+ if q(n) forms an upper bound on p(n), intuitively we can see that when you take the log of both sides, q(n) will still be greater. \\
+ More formally, let's take the limit as n $\to$ $\infty$ of $\frac{lg (p(n))}{\lg (q(n))}$ \\
+ = $\frac{\frac{1}{p(n)}}{\frac{1}{q(n)}}$ (by l'hop's rule)\\
+ = $\frac{1}{p(n)(q(n))}$
+ We can see this limit approaches zero because q(n) is increasing integers, and p(n) is an upper limit on that so values must also be positive integers. Since this limit is zero, it is TRUE that $\lg (p(n)) = O(\lg (q(n))$
+ \end{solution}
   \fi
     
     
